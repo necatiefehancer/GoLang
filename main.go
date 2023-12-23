@@ -5,8 +5,33 @@ import (
 	"os"
 )
 
-func main() {
+type Languages string
 
+const (
+	JAVASCRİPT Languages = "Javascript D"
+	C          Languages = "C"
+	PYTHON     Languages = "Python"
+	JAVA       Languages = "Java"
+)
+
+func PrintLanguage(lng Languages) {
+	fmt.Println(lng)
+}
+
+func main() {
+	ConstantState()
+}
+
+func ConstantState() {
+	PrintLanguage(JAVASCRİPT)
+	PrintLanguage(JAVA)
+	PrintLanguage(PYTHON)
+	PrintLanguage(C)
+}
+
+func BlcakIdentifier() {
+	var _, x, _ int = 0, 9, 8
+	fmt.Println(x)
 }
 
 func letterUpperKeywords() {
