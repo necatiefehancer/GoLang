@@ -28,7 +28,6 @@ func main() {
 func ConsoleInputs() {
 
 	reader := bufio.NewReader(os.Stdin)
-	fmt.Print("Enter value")
 	str, _ := reader.ReadString('\n')
 	fmt.Println("Your Values ", str)
 
