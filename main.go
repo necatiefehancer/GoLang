@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"strconv"
+	"strings"
 )
 
 type Languages string
@@ -19,7 +22,63 @@ func PrintLanguage(lng Languages) {
 }
 
 func main() {
-	ConstantState()
+	ConsoleInputs()
+}
+
+func ConsoleInputs() {
+
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Enter value")
+	str, _ := reader.ReadString('\n')
+	fmt.Println("Your Values ", str)
+
+	fmt.Print("Enter number")
+	str, _ = reader.ReadString('\n')
+	f, err := strconv.ParseFloat(strings.TrimSpace(str), 64)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		fmt.Printf("your values %v", f)
+	}
+
+}
+
+func ConsoleOutputs() {
+	var (
+		text              string = "Necati Efe Hancer"
+		stringLength, err        = fmt.Println(text)
+		aNumber           int    = 28
+		isBool            bool   = true
+	)
+	fmt.Println(stringLength, err)
+	fmt.Printf("Value of number %v \n", aNumber)
+	fmt.Printf("Value of boolean %v\n", isBool)
+	fmt.Printf("Value of converted float %.2f\n", float64(aNumber))
+	fmt.Printf("Data Types %T %T %T %T %T %T", text, stringLength, err, aNumber, isBool, 15.8)
+}
+
+func convertionVariables() {
+
+	var (
+		deger1 string  = "8"
+		deger2 int     = 10
+		deger3 float64 = 2.8
+	)
+
+	convertedNumber1, err := strconv.Atoi(deger1)
+
+	fmt.Println(deger1, deger2, deger3)
+
+	fmt.Println(convertedNumber1, err)
+
+	var convertedNumber2 string = strconv.Itoa(deger2)
+
+	fmt.Println(convertedNumber2 + "sivas")
+
+	var i int = 80
+	var j float64 = float64(i)
+	var k string = "75"
+	fmt.Println(i, j, k)
 }
 
 func ConstantState() {
