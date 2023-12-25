@@ -6,6 +6,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 type Languages string
@@ -22,11 +23,126 @@ func PrintLanguage(lng Languages) {
 }
 
 func main() {
-	ConsoleInputs()
+	StatementBreakContiuneGoto()
+}
+
+func StatementBreakContiuneGoto() {
+	///break
+
+	// bulunduğu scope kırar ordan çıkarır programı
+	var i int = 0
+	for {
+		if i >= 3 {
+			break
+		}
+		fmt.Println("i values of :", i)
+		i++
+	}
+	fmt.Println("Break döngüyü bulunduğu scope`ı kırdı ve çıktı")
+
+}
+
+func SwitchStatementControl() {
+
+	var a int = 13
+	///case sağlasın sağlamasın fallthrough olursa alltaki case de çalıştırılır
+	switch a {
+	case 9:
+		fmt.Println("numeric ==9")
+		// fallthrough
+	case 10:
+		fmt.Println("numeric ==10")
+	default:
+		fmt.Println("not declared types")
+	}
+
+	var score int
+	fmt.Println("Please log a score ")
+	fmt.Scanf("%v", &score)
+	fmt.Printf("%v", score)
+	switch {
+	case score <= 59:
+		fmt.Println("Your Notes F")
+	case score <= 69:
+		fmt.Println("Your Notes C")
+	case score <= 79:
+		fmt.Println("Your Notes D")
+	case score <= 89:
+		fmt.Println("Your Notes B")
+	case score <= 100:
+		fmt.Println("Your notes A")
+	default:
+		fmt.Println("Not defined value")
+
+	}
+
+}
+
+func İfStateMentControl() {
+
+	var (
+		a   int = 10
+		b   int = 10
+		foo int = 1
+	)
+
+	if a > b {
+		fmt.Println("a>b")
+	} else if a == b {
+		fmt.Println("a=b")
+	} else {
+		fmt.Println("b>a")
+	}
+
+	if foo == 1 {
+		fmt.Println("bar")
+	}
+
+	//if içinde initilaze kurulum yapıp sorgulama
+
+	if efe := 9; efe == 3 {
+		fmt.Println("efe ==3")
+	} else {
+		fmt.Println("efe!=3")
+	}
+	//   fmt.Println(efe) hata verir o değişken if içinde tanımlandı scope kapsam hatası
+}
+
+func DateAndTimePackages() {
+
+	///istenilen tarihi time tipinde oluşturma
+	t := time.Date(2004, time.September, 6, 22, 18, 50, 12, time.UTC)
+	fmt.Printf("%T", t)
+	fmt.Printf("%s", t)
+
+	///şu anki saat tarih ve zamanı now methodu ile çekme
+	//var ile değişken tipi bildirimi ile time tanımlama
+	var now time.Time = time.Now()
+	fmt.Println(now)
+
+	// time nesnesi içinden istenilen verileri çekme
+
+	fmt.Println(t.Day())
+	fmt.Println(t.Weekday())
+	fmt.Println(t.Month())
+	fmt.Println(t.Year())
+	fmt.Println(t.Location())
+
+	///tarihi değiştirip yeni tarih dönderme
+
+	var newTime time.Time = t.AddDate(1, 1, 1)
+	fmt.Println(newTime)
+
+	//formatlı gösterim
+	// senin tarihini istediğin format şeklinde layouıt alarak geri döndürür
+	var longFormat string = "Monday , september 6 , 2004"
+	fmt.Println(newTime.Format(longFormat))
+
+	var shortFormat string = "1/2/06"
+	fmt.Println(t.Format(shortFormat))
 }
 
 func ConsoleInputs() {
-
 	reader := bufio.NewReader(os.Stdin)
 	str, _ := reader.ReadString('\n')
 	fmt.Println("Your Values ", str)
