@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
+	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -23,7 +25,102 @@ func PrintLanguage(lng Languages) {
 }
 
 func main() {
-	StatementBreakContiuneGoto()
+	// ErrorStatement()
+	a, err := errorTest()
+	fmt.Println(a)
+	checkError(err)
+}
+
+func errorTest() (int, error) {
+	// fmt.Errorf() ile geriye isteilen veride error dönderilebilir
+	var i int = 5
+	if i < 0 {
+		return 0, fmt.Errorf("Bu bir hata")
+	}
+	return 1, nil
+}
+
+/// her dakika if err!=nil yazmak yerine kontrolcü fonksiyon geliştirmesi
+
+func checkError(err error) {
+	if err != nil {
+		log.Fatal("Error ", err.Error())
+		// fmt.Println("ERROR :", err.Error())
+		//programı exit ile kapatırsın 1 true değer görünce kapar
+		os.Exit(1)
+	}
+}
+
+func ErrorStatement() {
+
+	file, error := os.Open("demo.txt")
+
+	//hata var ise
+	if error != nil {
+		fmt.Println(error.Error())
+	} else {
+		fmt.Println(file.Name())
+	}
+
+	//kendi error hatanı oluştur
+
+	var myError = errors.New("Bu bir hatadır")
+	fmt.Println(myError.Error())
+
+}
+
+func Loops() {
+
+	for i := 0; i < 5; i++ {
+		fmt.Println(i)
+	}
+
+	///koşulsuz döngü tanımlayıp sonsuz çalıştırma
+
+	// for i := 0; ; i++ {
+	// 	fmt.Println(i)
+	// }
+
+	///; elleme bu bir kalıptır
+
+	// for i := 0; i < 3;i { yine sonsuz çalışır
+	// 	fmt.Println(i)
+	// }
+
+	// for yapısında while kullanımı
+
+	// var deger int = 7
+
+	// for deger < 18 {
+	// 	fmt.Println(deger)
+	// 	deger++
+	// }
+
+	///Range kullanımı
+
+	var pow = []int{2, 4, 6, 8, 10, 16}
+
+	//range den value değişkeni atayarak elde etme
+	for i, v := range pow {
+		fmt.Printf("%v İndisli elemanın karşılığı %v\n", i, v)
+	}
+
+	var length = [...]string{"%", "&", "/", "{}", "|}"}
+
+	for i := range length {
+		fmt.Println(i, length[i])
+	}
+
+	var countryies = map[string]string{"Turkey": "Ankara", "France": "paris", "England": "Tokyo"}
+
+	for k := range countryies {
+		fmt.Println(countryies[k])
+	}
+
+	for k, v := range countryies {
+		fmt.Printf("key: %v value: %v\n", k, v)
+	}
+
 }
 
 func StatementBreakContiuneGoto() {
@@ -39,7 +136,6 @@ func StatementBreakContiuneGoto() {
 		i++
 	}
 	fmt.Println("Break döngüyü bulunduğu scope`ı kırdı ve çıktı")
-
 }
 
 func SwitchStatementControl() {
