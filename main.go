@@ -25,10 +25,178 @@ func PrintLanguage(lng Languages) {
 }
 
 func main() {
-	// ErrorStatement()
-	a, err := errorTest()
-	fmt.Println(a)
-	checkError(err)
+	Maps()
+}
+
+func Maps() {
+	//make ile map oluşturdun
+	var plates = make(map[int]string)
+
+	//değer atadın
+	plates[58] = "Sivas"
+	plates[34] = "İstanbul"
+	plates[28] = "Giresun"
+	plates[44] = "Malatya"
+	plates[12] = "Bingöl"
+
+	fmt.Println(plates)
+
+	///delete fonksiyonu ile maptan veri sildin 1 parametre map 2 parmetre key
+	delete(plates, 58)
+
+	//foreach ile map dolanım
+
+	for k, v := range plates {
+		fmt.Printf("key %v and values %v \n", k, v)
+	}
+
+	fmt.Println(plates)
+
+	var keys = make([]int, len(plates))
+
+	var i int = 0
+
+	for k := range plates {
+		keys[i] = k
+		i++
+	}
+
+	fmt.Println(keys)
+
+	for _, v := range keys {
+		fmt.Printf("values of map %v \n", plates[v])
+	}
+
+	var eleman, err = plates[49]
+	fmt.Println(eleman, err)
+}
+
+func Slices() {
+
+	var myArray = [5]int{1, 2, 3, 4, 5}
+	var mySlice []int = myArray[1:4]
+	fmt.Println(mySlice)
+
+	/// sliceler [a:b] a dan a dahil başlar b ye kadar b dahil olmamak üzere alır
+	// sliceler arraylardan kopyalar len olarak eleman sayısını alırlar ama
+	///sliceler cap() kapasite olarak [a:b] a ile b arasını değil a dan başlayıp arrayin sonuna kadar kapasite alır
+
+	var keyWordArray = [10]string{"a", "b", "c", "d", "e", "f", "g", "h", "ı", "j"}
+	var sliceKeyword []string = keyWordArray[2:5]
+	fmt.Println(sliceKeyword)
+	fmt.Printf("sliceKeyword length %v ", len(sliceKeyword))
+	fmt.Printf("sliceKeyword of capacity %v", cap(sliceKeyword))
+	///c d e len=3 cap 8
+
+	///sliceler veriyi kopyalamaz bellekten adresini tutarlar yine arrayden çekip işlem yaparlar
+
+	///slice in bir verisini değiştirirsen arrayinde verisi değişir pointer yoluyla çalıştıkları içindir
+
+	var myArray2 = [3]int{8, 16, 24}
+	var mySlice2 []int = myArray2[2:3]
+	fmt.Println(mySlice2)
+	mySlice2[0] = 58
+	fmt.Println(myArray2, mySlice2)
+	///tanımlanım ve değer değişimi ... operatör ile dizinin elemanlarını sayıp derleyici atayack
+	var myArray3 = [...]int{99, 100, 101}
+	var mySlice3 []int = myArray3[:]
+	fmt.Println("slice", mySlice3)
+	fmt.Println("array", myArray3)
+	mySlice3[0] = 28
+	fmt.Println("slice", mySlice3)
+	fmt.Println("array", myArray3)
+
+	///append() function kullanımı
+
+	var mySlice4 = []string{"red", "green", "blue"}
+	fmt.Println("myslice4 ", mySlice4)
+	mySlice4 = append(mySlice4, "black", "ıdentifier")
+	//append ile ilk elemanı silme
+	fmt.Println("myslice4 ", mySlice4)
+	mySlice4 = append(mySlice4[1:len(mySlice4)])
+	fmt.Println("myslice4 ", mySlice4)
+	//append ile tek parametre ile son elemanı silme
+	mySlice4 = append(mySlice4[:len(mySlice4)-1])
+	fmt.Println("myslice4 ", mySlice4)
+
+	///make() function ile kullanım
+	/// bana it tipinde 5 elemanlık ve kapasitesi 5 olan slice oluştur
+	///ancak eleman ekledikçe derleyici ve go otomatikmen kapasiteyi arttırır
+	// kapasite ve len karıştrıma
+	mySlice5 := make([]int, 5, 5)
+	mySlice5[0] = 10
+	fmt.Printf("array %v len %v capaticy %v \n", mySlice5, len(mySlice5), cap(mySlice5))
+	mySlice5[1] = 20
+	fmt.Printf("array %v len %v capaticy %v \n", mySlice5, len(mySlice5), cap(mySlice5))
+	mySlice5[2] = 30
+	fmt.Printf("array %v len %v capaticy %v \n", mySlice5, len(mySlice5), cap(mySlice5))
+	mySlice5[3] = 40
+	fmt.Printf("array %v len %v capaticy %v \n", mySlice5, len(mySlice5), cap(mySlice5))
+	mySlice5[4] = 50
+	fmt.Printf("array %v len %v capaticy %v \n", mySlice5, len(mySlice5), cap(mySlice5))
+	mySlice5 = append(mySlice5, 58)
+	fmt.Printf("array %v len %v capaticy %v \n", mySlice5, len(mySlice5), cap(mySlice5))
+
+}
+
+func Arrays() {
+
+	///array tanım atama yazdırım
+	var myArray1 = [3]int{}
+	myArray1[0] = 23
+	myArray1[1] = 28
+	myArray1[2] = 58
+	fmt.Println(myArray1)
+
+	//ilk elemanı eksik tanımlayıp sonradan set etme testi
+	var myArray2 = [3]int{25, 23}
+	myArray2[2] = 44
+	fmt.Println(myArray2)
+
+	///foerach ile dolanma
+	var colors [3]string
+	colors[0] = "red"
+	colors[1] = "green"
+	colors[2] = "blue"
+	fmt.Println(colors)
+	for k, v := range colors {
+		fmt.Printf("key : %v value : %v \n", k, v)
+	}
+
+	///len fonksiyonu ile dizi içindeki eleman sayısnı bulma
+	///array oluşturup her indexi kullanıcıdan alıp uzunluk belirleyip diziyi bastırma
+	var myArray3 [5]string
+	for k := range myArray3 {
+		var reader = bufio.NewReader(os.Stdin)
+		fmt.Printf("%v indexin karşılığını giriniz \n", k)
+		value, err := reader.ReadString('\n')
+		if err != nil {
+			log.Fatal("okuma hatası program sonlandırılıyor")
+		} else {
+			myArray3[k] = strings.TrimSpace(value)
+			fmt.Println("girilen değer atandı")
+		}
+	}
+	fmt.Println(myArray3)
+	fmt.Println("myArray3 arrays length", len(myArray3))
+}
+
+func Arrays2() {
+
+	// ... operatör ile eleman syısı vermeden tanımlama derleyici kendi sayar
+
+	var myArray = [...]int{10, 200, 2, 75, 4, 57, 8, 8, 45, 5, 45, 49, 118}
+	fmt.Println(myArray)
+	fmt.Println("length ", len(myArray))
+
+	///cap kapasite fonskiyonu
+
+	var myArray2 [3]string
+	myArray2[0] = "scania"
+	myArray2[1] = "bmc"
+	fmt.Println(len(myArray2))
+	fmt.Println(cap(myArray2))
+
 }
 
 func errorTest() (int, error) {
