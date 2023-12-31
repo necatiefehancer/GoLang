@@ -5,10 +5,17 @@ import (
 	"errors"
 	"fmt"
 	"log"
+	"math/rand"
+	"myModules/functions"
+	"myModules/utils"
 	"os"
 	"strconv"
 	"strings"
 	"time"
+
+	///alias
+	"github.com/fatih/color"
+	loge "github.com/koding/logging"
 )
 
 type Languages string
@@ -25,7 +32,75 @@ func PrintLanguage(lng Languages) {
 }
 
 func main() {
-	Maps()
+	functionsForConsole()
+}
+
+func functionsForConsole() {
+
+	fmt.Println(functions.Add(8, 9))
+	functions.SayHello1()
+	functions.SayHello2("Efe Hançer")
+
+	var statusCode int = 73
+
+	functions.Change1(statusCode)
+	fmt.Println(statusCode)
+
+	functions.Change1ByReference(&statusCode)
+	fmt.Println(statusCode)
+	var a, b string = functions.Swap("necati", "efe")
+	fmt.Println(a, b)
+
+	var myArray = []int{8, 16, 24, 36}
+	var length, sum int = functions.VariadicSum(myArray...)
+	fmt.Printf("length : %v sum : %v \n", length, sum)
+
+	fmt.Println(functions.NamedVariableFunctions(10))
+
+	var x, y int = functions.NamedVariableFunctions(20)
+	fmt.Println("geriye değişken dönüşü yapan fonksyion x = ", x, "y = ", y)
+
+	var mySlices = []int{9, 18, 27, 36, 45}
+	var k, l int = functions.NamedVariableFunctionsVariadic(mySlices...)
+	fmt.Printf("geriye değişken dönüşü yapan variadic fonkiyon sum degeri : %v len degeri : %v \n", k, l)
+
+}
+
+func PackageStatement() {
+
+	//random paketi
+	fmt.Println(rand.Intn(10))
+
+	//strings contains
+
+	fmt.Printf("test kelimesinin içinde est stringi %v\n", strings.Contains("test", "est"))
+
+	// strings count
+	fmt.Println(strings.Count("sivas", "a"))
+
+	//hasprefix
+
+	fmt.Println(strings.HasPrefix("unit_test", "unit"))
+
+	//hassuffix
+
+	fmt.Println(strings.HasSuffix("efehancer.js", "js"))
+
+	//index
+
+	fmt.Println(strings.Index("efe", "u"))
+
+	//türk geliştirici fatihin paketi
+
+	color.Red("sivas58")
+
+	//türk gelişritici paketi log
+
+	loge.Info("Uygulama sonu alias ile")
+
+	//import alias problem anlatımı
+
+	utils.WritingString("public private büyük kçük kapsamın çalıştı")
 }
 
 func Maps() {
