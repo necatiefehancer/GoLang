@@ -1,6 +1,9 @@
 package functions
 
-import "fmt"
+import (
+	"fmt"
+	"myModules/data"
+)
 
 func Add(x int, y int) (int, error) {
 
@@ -51,13 +54,38 @@ func NamedVariableFunctions(sum int) (x, y int) {
 }
 
 func NamedVariableFunctionsVariadic(terms ...int) (sum int, lenterms int) {
-
 	for _, v := range terms {
 		sum += v
 	}
-
 	lenterms = len(terms)
-
 	return
+}
 
+func VariadicMessageFunctions(messages ...string) {
+	for _, message := range messages {
+		fmt.Println(message)
+	}
+}
+
+func VariadicSumFunctions(terms ...int) (sum int) {
+	for _, num := range terms {
+		sum += num
+	}
+	return
+}
+
+func AnonimFunctions() {
+	var anonim = func(terms ...int) (numTerms int, sum int) {
+		for _, v := range terms {
+			sum += v
+		}
+		numTerms = len(terms)
+		return
+	}
+
+	fmt.Println(anonim(9, 2, 2))
+}
+
+func DeferStatement() {
+	data.Start()
 }

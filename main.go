@@ -7,6 +7,7 @@ import (
 	"log"
 	"math/rand"
 	"myModules/functions"
+	"myModules/interfaces"
 	"myModules/utils"
 	"os"
 	"strconv"
@@ -32,7 +33,24 @@ func PrintLanguage(lng Languages) {
 }
 
 func main() {
-	functionsForConsole()
+
+	var ferrari interfaces.Ferrari
+	ferrari.SetCarBrand("ferrari")
+	ferrari.SetCarModel("F50")
+	ferrari.SetCarColor("red")
+	ferrari.SetCarSpeed(340)
+	ferrari.SetCarPrice(1.98)
+	ferrari.SetSpecial(true)
+	fmt.Println(ferrari.Info())
+
+	var mercedes interfaces.Mercedes
+	mercedes.SetCarBrand("Mercedes")
+	mercedes.SetCarModel("AXOR 1840")
+	mercedes.SetCarColor("White")
+	mercedes.SetCarSpeed(120)
+	mercedes.SetCarPrice(1.1)
+	fmt.Println(mercedes.Info())
+
 }
 
 func functionsForConsole() {
@@ -63,6 +81,12 @@ func functionsForConsole() {
 	var mySlices = []int{9, 18, 27, 36, 45}
 	var k, l int = functions.NamedVariableFunctionsVariadic(mySlices...)
 	fmt.Printf("geriye değişken dönüşü yapan variadic fonkiyon sum degeri : %v len degeri : %v \n", k, l)
+
+	functions.VariadicMessageFunctions("hello", "go", "develeopers", "backend")
+
+	fmt.Println(functions.VariadicSumFunctions(9, 10, 98, 84, 73))
+
+	functions.AnonimFunctions()
 
 }
 
